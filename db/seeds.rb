@@ -7,17 +7,28 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Airport.destroy_all
-Airport.create!([
-                  {
-                    code: 'PDX'
-                  },
-                  {
-                    code: 'JFK'
-                  },
-                  {
-                    code: 'LAX'
-                  },
-                  {
-                    code: 'MCI'
-                  }
-                ])
+Airport.create!([{ code: 'PDX' }, { code: 'JFK' }, { code: 'LAX' }, { code: 'MCI' }])
+PDX = Airport.find_by("code = 'PDX'")
+JFK = Airport.find_by("code = 'JFK'")
+LAX = Airport.find_by("code = 'LAX'")
+MCI = Airport.find_by("code = 'MCI'")
+
+Flight.destroy_all
+Flight.create!([
+                {
+                  departing_airport_id: PDX.id,
+                  arriving_airport_id: JFK.id
+                },
+                {
+                  departing_airport_id: JFK.id,
+                  arriving_airport_id: MCI.id
+                },
+                {
+                  departing_airport_id: PDX.id,
+                  arriving_airport_id: LAX.id
+                },
+                {
+                  departing_airport_id: LAX.id,
+                  arriving_airport_id: PDX.id
+                }
+              ])
