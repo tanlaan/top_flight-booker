@@ -16,18 +16,22 @@ MCI = Airport.find_by("code = 'MCI'")
 Flight.destroy_all
 Flight.create!([
                 {
+                  start: Time.parse('October 2022'),
                   departing_airport_id: PDX.id,
                   arriving_airport_id: JFK.id
                 },
                 {
+                  start: Time.parse('October 2022'),
                   departing_airport_id: JFK.id,
                   arriving_airport_id: MCI.id
                 },
                 {
+                  start: Time.parse('November 23 2022 12:30:00'),
                   departing_airport_id: PDX.id,
                   arriving_airport_id: LAX.id
                 },
                 {
+                  start: Time.parse('November 23 2022 01:00:00'),
                   departing_airport_id: LAX.id,
                   arriving_airport_id: PDX.id
                 }
