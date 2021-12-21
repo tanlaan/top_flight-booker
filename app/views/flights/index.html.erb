@@ -1,2 +1,55 @@
-<h1>Flights#index</h1>
-<p>Find me in app/views/flights/index.html.erb</p>
+<h1><%= link_to 'One Way Ticket To Paradise', root_path %></h1>
+<%= form_with(model: @flight, method: :get) do |f| %>
+  <%# Departing airport selector %>
+  <%= f.collection_select :departing_airport_id,
+    Flight.select(:departing_airport_id).distinct.includes(:departing_airport),
+    :departing_airport_id,
+    ->(x) { x.departing_airport.code },
+    { include_blank: "Departing" },
+    { required: true }
+  %>
+
+  <%# Arriving airport selector %>
+  <%= f.collection_select :arriving_airport_id,
+    Flight.select(:arriving_airport_id).distinct.includes(:arriving_airport),
+    :arriving_airport_id,
+    ->(x) { x.arriving_airport.code },
+    { include_blank: "Arriving" },
+    { required: true }
+  %> 
+
+  <%# Passenger selecter %>
+  <%= fields do |p| %>
+    <%= p.select :passengers,
+      %w[1 2 3 4],
+      { include_blank: "Passengers",
+        selected: params[:passengers]
+      },
+      { required: true }
+    %>
+  <% end %>
+
+  <%# Selection of all unique flight start dates %>
+  <%= f.collection_select :start, 
+    Flight.select("distinct date(start) start"),
+    -> (x) { x.start.to_date},
+    -> (x) { x.start.to_date},
+    { include_blank: "Date", selected: params[:flight] ? params[:flight][:start].to_date : '' },
+    { required: true }
+  %>
+  <%= f.submit 'Find Flight' %>
+<% end %>
+
+<%# Search results %>
+<% unless request.query_parameters.empty? %>
+  <ul>
+    <% Flight.sameday(Time.parse(params[:flight][:start]))
+              .where("departing_airport_id = ?", params[:flight][:departing_airport_id])
+              .where("arriving_airport_id = ?", params[:flight][:arriving_airport_id])
+              .includes(:departing_airport, :arriving_airport)
+              .each do |flight| 
+    %>
+      <li><%= flight.departing_airport.code %> | <%= flight.arriving_airport.code %> | <%= flight.start %></li>
+    <% end %>
+  </ul>
+<% end %>
