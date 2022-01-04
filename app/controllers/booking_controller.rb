@@ -1,7 +1,7 @@
 class BookingController < ApplicationController
   def new
     @flight = Flight.find(params[:flight_id])
-    @passengers = Array.new(params[:passengers].to_i) {Passenger.new}
+    @passengers = Array.new(params[:passengers].to_i) { Passenger.new }
   end
 
   def create
