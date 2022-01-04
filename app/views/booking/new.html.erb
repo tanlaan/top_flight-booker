@@ -1,0 +1,16 @@
+<h2>Your Flight</h2>
+<p><%= @flight.arriving_airport.code %> | <%= @flight.departing_airport.code %> | <%= @flight.start %></p>
+<%= form_with url: booking_create_path do |f| %>
+  <% @passengers.each do |pass| %>
+    <%= fields_for 'booking[passengers_attributes][]', pass do |pf| %>
+      <%= pf.label :name %>
+      <%= pf.text_field :name %><br>
+      <%= pf.label :email %>
+      <%= pf.text_field :email %>
+      <br><br>
+    <% end %>
+  <% end %>
+  <%# pass through the flight_id %>
+  <%= hidden_field_tag 'booking[flight_id]', params[:flight_id] %>
+  <%= f.submit "Book Flight"%>
+<% end %>

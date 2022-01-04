@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Booking.destroy_all
+Passenger.destroy_all
+
 Airport.destroy_all
 Airport.create!([{ code: 'PDX' }, { code: 'JFK' }, { code: 'LAX' }, { code: 'MCI' }])
 PDX = Airport.find_by("code = 'PDX'")
