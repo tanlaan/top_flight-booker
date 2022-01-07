@@ -1,0 +1,40 @@
+<h1>Booking #<%= @booking.id %></h1>
+
+<%# @booking has our current booking inside %>
+<h2>Flight Information:</h2>
+<table>
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>To</th>
+      <th>Departing</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @booking.flight.departing_airport.code %></td>
+      <td><%= @booking.flight.arriving_airport.code %></td>
+      <td><%= @booking.flight.start %></td>
+      <td><%= @booking.flight.duration %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Passenger Information:</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @booking.passengers.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

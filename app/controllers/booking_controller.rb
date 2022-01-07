@@ -6,7 +6,11 @@ class BookingController < ApplicationController
 
   def create
     @booking = Booking.create(booking_params)
-    redirect_to flights_url
+    redirect_to @booking
+  end
+
+  def show
+    @booking = Booking.find(params[:id])
   end
 
   private
