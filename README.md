@@ -2,7 +2,7 @@
 
 ## Task
 
-Today's task is to create a represntation of the experience you have when trying to buy one way tickets through an airline.
+Today's task is to create a representation of the experience you have when trying to buy one way tickets through an airline.
 
 There will be three parts of the task to perform:
 
