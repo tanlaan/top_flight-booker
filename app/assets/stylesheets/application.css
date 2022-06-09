@@ -13,3 +13,37 @@
  *= require_tree .
  *= require_self
  */
+
+ /* BASIC RESET */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: skyblue;
+  width: 40%;
+  margin: auto;
+}
+
+header {
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  rotate: -12deg;
+}
+
+nav a {
+  color: darkslategrey;
+}
+
+nav a:hover {
+  color: black;
+  text-shadow: 2px 2px 2px gray;
+}
+
+nav a::after {
+  content: "✈️";
+  padding-left: 0.5rem;
+  display: inline-block;
+}
